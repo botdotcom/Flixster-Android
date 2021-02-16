@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+<!--    xmlms:tools="https://schemas.android.com/tools"-->
+
+    <ImageView
+        android:id="@+id/movie_image_view"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@mipmap/ic_launcher"
+        android:layout_marginRight="10dp"
+        android:contentDescription="Movie poster" />
+
+    <TextView
+        android:id="@+id/movie_title_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@+id/movie_image_view" />
+
+    <TextView
+        android:id="@+id/movie_desc_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/movie_title_text_view"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/movie_image_view" />
+
+</RelativeLayout>
