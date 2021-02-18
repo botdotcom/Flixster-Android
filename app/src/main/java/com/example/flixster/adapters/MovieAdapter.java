@@ -53,9 +53,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView movieTitleTextView;
-        public TextView movieOverviewTextView;
+        private TextView movieTitleTextView;
+        private TextView movieOverviewTextView;
         private ImageView moviePosterImageView;
+        private TextView movieVotesTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -63,18 +64,25 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             movieTitleTextView = (TextView) itemView.findViewById(R.id.movie_title_text_view);
             movieOverviewTextView = (TextView) itemView.findViewById(R.id.movie_overview_text_view);
             moviePosterImageView = (ImageView) itemView.findViewById(R.id.movie_image_view);
+            movieVotesTextView = (TextView) itemView.findViewById(R.id.movie_votes_text_view);
         }
 
         public void bind(Movie movie) {
             movieTitleTextView.setText(movie.getTitle());
             movieOverviewTextView.setText(movie.getOverview());
+            movieVotesTextView.setText(movie.getVotes() + " out of 10");
             String imageURL;
 
             // check for screen orientation and change image accordingly
-            if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+            if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 imageURL = movie.getBackdropPath();
-            else
+            }
+            /*else if (Double.parseDouble(movie.getVotes()) >= 5.0){
+                imageURL = movie.getBackdropPath();
+            }*/
+            else {
                 imageURL = movie.getPosterPath();
+            }
 
             // add poster image
             Glide.with(context).load(imageURL).into(moviePosterImageView);
