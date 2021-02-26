@@ -16,6 +16,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
+        android:src="@drawable/small_movie_poster"
         android:contentDescription="Movie poster" />
 
     <TextView
@@ -40,8 +41,9 @@
         android:layout_toEndOf="@+id/movie_image_view"
         tools:text="Wonder Woman comes into conflict with the Soviet Union during the Cold War in the 1980s and finds a formidable foe by the name of the Cheetah." />
 
-    <TextView
-        android:id="@+id/movie_votes_text_view"
+    <RatingBar
+        android:id="@+id/movie_votes_rating_bar"
+        style="@style/Widget.AppCompat.RatingBar.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/movie_overview_text_view"
@@ -49,8 +51,24 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/movie_image_view"
-        android:textColor="#E91E63"
-        android:textSize="16sp"
-        tools:text="7 out of 10" />
+        android:isIndicator="true"
+        android:numStars="10"
+        android:progressTint="@color/dark_pink"
+        android:transformPivotX="0dp"
+        android:transformPivotY="0dp" />
+
+
+    <!--    <TextView-->
+<!--        android:id="@+id/movie_votes_text_view"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/movie_overview_text_view"-->
+<!--        android:layout_centerVertical="true"-->
+<!--        android:layout_marginStart="5dp"-->
+<!--        android:layout_marginTop="5dp"-->
+<!--        android:layout_toEndOf="@+id/movie_image_view"-->
+<!--        android:textColor="#E91E63"-->
+<!--        android:textSize="16sp"-->
+<!--        tools:text="7 out of 10" />-->
 
 </RelativeLayout>

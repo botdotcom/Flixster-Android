@@ -19,6 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30sp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/youtube_player"
         tools:text="Wonder Woman 1984" />
 
     <RatingBar
@@ -26,13 +28,18 @@
         style="@style/Widget.AppCompat.RatingBar.Indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/moviedetail_title_text_view"
         android:isIndicator="true"
-        android:numStars="10" />
+        android:numStars="10"
+        android:progressTint="@color/dark_pink" />
 
     <TextView
         android:id="@+id/moviedetail_overview_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/moviedetail_overview_text_view"
         android:textSize="16sp"
         tools:text="Wonder Woman comes into conflict with the Soviet Union during the Cold War in the 1980s and finds a formidable foe by the name of the Cheetah." />
 

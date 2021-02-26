@@ -7,15 +7,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import com.example.flixster.MovieDetailsActivity;
 import com.example.flixster.R;
 import com.example.flixster.models.Movie;
@@ -63,7 +64,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         private TextView movieTitleTextView;
         private TextView movieOverviewTextView;
         private ImageView moviePosterImageView;
-        private TextView movieVotesTextView;
+        private RatingBar movieVotesRatingBar;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,29 +73,29 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             movieTitleTextView = (TextView) itemView.findViewById(R.id.movie_title_text_view);
             movieOverviewTextView = (TextView) itemView.findViewById(R.id.movie_overview_text_view);
             moviePosterImageView = (ImageView) itemView.findViewById(R.id.movie_image_view);
-            movieVotesTextView = (TextView) itemView.findViewById(R.id.movie_votes_text_view);
-
+            movieVotesRatingBar = (RatingBar) itemView.findViewById(R.id.movie_votes_rating_bar);
         }
 
         public void bind(Movie movie) {
             movieTitleTextView.setText(movie.getTitle());
             movieOverviewTextView.setText(movie.getOverview());
-            movieVotesTextView.setText(movie.getVotes() + " out of 10");
+            movieVotesRatingBar.setRating((float) movie.getVotes());
             String imageURL;
 
             // check for screen orientation and change image accordingly
             if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 imageURL = movie.getBackdropPath();
             }
-            /*else if (Double.parseDouble(movie.getVotes()) >= 5.0){
-                imageURL = movie.getBackdropPath();
-            }*/
+//            else if (movie.getVotes() >= 7.0){
+//                imageURL = movie.getBackdropPath();
+//            }
             else {
                 imageURL = movie.getPosterPath();
             }
 
             // add poster image
-            Glide.with(context).load(imageURL).into(moviePosterImageView);
+            int radius = 30, margin = 5;
+            Glide.with(context).load(imageURL).transform(new RoundedCornersTransformation(radius, margin)).into(moviePosterImageView);
 
             // add movie on click listener
             movieContainer.setOnClickListener(new View.OnClickListener() {
