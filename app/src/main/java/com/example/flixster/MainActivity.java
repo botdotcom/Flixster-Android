@@ -22,9 +22,10 @@ import java.util.List;
 import okhttp3.Headers;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String NOW_PLAYING_MOVIES_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
     private static final String ACTIVITY_TAG = "MainActivity";
     List<Movie> movieList;
+    MoviesDbClient moviesDbClient;
+    MovieAdapter movieAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
         movieList = new ArrayList<>();
         
         // create adapter
-        MovieAdapter movieAdapter = new MovieAdapter(this, movieList);
+        // MovieAdapter movieAdapter = new MovieAdapter(this, movieList);
+        movieAdapter = new MovieAdapter(this, movieList);
 
         // set adapter on recycler view
         RecyclerView recyclerView = findViewById(R.id.movie_list_recycler_view);
@@ -44,10 +46,18 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // get JSON data from API
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.get(NOW_PLAYING_MOVIES_URL, new JsonHttpResponseHandler() {
+        fetchMoviesNowPlaying();
+    }
+
+    public List<Movie> getMovieList() {
+        return movieList;
+    }
+
+    private void fetchMoviesNowPlaying() {
+        moviesDbClient = new MoviesDbClient();
+        moviesDbClient.getMoviesNowPlaying(new JsonHttpResponseHandler() {
             @Override
-            public void onSuccess(int statusCode, Headers headers, JSON json) {
+            public void onSuccess(int i, Headers headers, JSON json) {
                 Log.d(ACTIVITY_TAG, "On success");
                 JSONObject jsonObject = json.jsonObject;
 
@@ -56,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
                     Log.i(ACTIVITY_TAG, "Got results");
                     movieList.addAll(Movie.moviesFromJsonArray(movieResults));
                     movieAdapter.notifyDataSetChanged();
-                    // Log.i(ACTIVITY_TAG, "Movies: " + movieList.size());
                 }
                 catch (JSONException je) {
                     Log.e(ACTIVITY_TAG, "JSON exception hit", je);
@@ -64,13 +73,9 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(int statusCode, Headers headers, String s, Throwable throwable) {
+            public void onFailure(int i, Headers headers, String s, Throwable throwable) {
                 Log.d(ACTIVITY_TAG, "On failure");
             }
         });
-    }
-
-    public List<Movie> getMovieList() {
-        return movieList;
     }
 }

@@ -23,9 +23,9 @@ import org.parceler.Parcels;
 import okhttp3.Headers;
 
 public class MovieDetailsActivity extends YouTubeBaseActivity {
-    private static final String YOUTUBE_API_KEY = "";
-    private static final String YOUTUBE_VIDEO_URL = "https://api.themoviedb.org/3/movie/%d/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
+    private static final String YOUTUBE_API_KEY = "AIzaSyBLtOjyvfu_ImIrUlflllbfmohoPSnncI4";
     private static final String ACTIVITY_TAG = "MovieDetailsActivity";
+    MoviesDbClient moviesDbClient;
 
     YouTubePlayerView youTubePlayerView;
     TextView movieTitleTextView;
@@ -48,10 +48,14 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
         movieOverviewTextView.setText(movie.getOverview());
         movieVotesRatingBar.setRating((float) movie.getVotes());
 
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.get(String.format(YOUTUBE_VIDEO_URL, movie.getId()), new JsonHttpResponseHandler() {
+        fetchMovieTrailerVideos(movie.getId());
+    }
+
+    private void fetchMovieTrailerVideos(int movieId) {
+        moviesDbClient = new MoviesDbClient();
+        moviesDbClient.getMoviesTrailerVideos(movieId, new JsonHttpResponseHandler() {
             @Override
-            public void onSuccess(int statusCode, Headers headers, JSON json) {
+            public void onSuccess(int i, Headers headers, JSON json) {
                 Log.d(ACTIVITY_TAG, "On success");
                 try {
                     JSONArray results = json.jsonObject.getJSONArray("results");
@@ -64,15 +68,14 @@ public class MovieDetailsActivity extends YouTubeBaseActivity {
                     String videoKey = results.getJSONObject(0).getString("key");
 
                     initializeYoutubeVideoKey(videoKey);
-//                    Log.i(ACTIVITY_TAG, "Video key: " + videoKey);
-                } catch (JSONException e) {
+                }catch (JSONException e) {
                     Log.e(ACTIVITY_TAG, "JSON exception hit", e);
                 }
             }
 
             @Override
-            public void onFailure(int statusCode, Headers headers, String s, Throwable throwable) {
-                Log.d(ACTIVITY_TAG, "On failure");
+            public void onFailure(int i, Headers headers, String s, Throwable throwable) {
+                    Log.d(ACTIVITY_TAG, "On failure");
             }
         });
     }
