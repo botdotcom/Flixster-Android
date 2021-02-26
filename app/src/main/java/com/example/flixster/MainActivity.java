@@ -73,26 +73,4 @@ public class MainActivity extends AppCompatActivity {
     public List<Movie> getMovieList() {
         return movieList;
     }
-
-    // temporary method
-    /*
-    private List<Movie> getMovies() {
-        Movie movie1 = new Movie("Batman Begins", "1st movie of The Dark Knight Trilogy by Christopher Nolan starring Christian Bale, Liam Neeson, Gary Oldman, Cillian Murphy, Morgan Freeman, Katie Holmes and Michael Caine as leads");
-        Movie movie2 = new Movie("The Dark Knight", "2nd movie of The Dark Knight Trilogy by Christopher Nolan starring Christian Bale, Heath Ledger, Gary Oldman, Aaron Eckhart, Maggie Gylenhaal and Michael Caine as leads");
-        Movie movie3 = new Movie("The Dark Knight Rises", "3rd movie of The Dark Knight Trilogy by Christopher Nolan starring Christian Bale, Tom Hardy, Anne Hathaway, Gary Oldman, Marion Cotillard, Morgan Freeman, Joseph Gordon-Hewitt and Michael Caine as leads");
-        Movie movie4 = new Movie("The Prestige", "A movie by Christopher Nolan starring Christian Bale, Hugh Jackman, Michael Caine, Scarlett Johannson, Rebecca Hall as leads");
-        Movie movie5 = new Movie("Inception", "A movie by Christopher Nolan starring Leonardo DiCaprio, Marion Cotillard, Tom Hardy, Joseph Gordon-Hewitt, Ken Watanabe, Elliot Page, Michael Caine and Aaron Eckhart as leads");
-        Movie movie6 = new Movie("Tenet", "A movie by Christopher Nolan starring John David Washington, Robert Pattinson, Elizabeth Debicki, Kenneth Branaugh and Michael Caine as leads");
-
-        List<Movie> movieList = new ArrayList<>();
-        movieList.add(movie1);
-        movieList.add(movie2);
-        movieList.add(movie3);
-        movieList.add(movie4);
-        movieList.add(movie5);
-        movieList.add(movie6);
-
-        return movieList;
-    }
-     */
 }

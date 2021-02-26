@@ -1,20 +1,26 @@
 package com.example.flixster.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.flixster.MovieDetailsActivity;
 import com.example.flixster.R;
 import com.example.flixster.models.Movie;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -53,6 +59,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        RelativeLayout movieContainer;
         private TextView movieTitleTextView;
         private TextView movieOverviewTextView;
         private ImageView moviePosterImageView;
@@ -61,10 +68,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            movieContainer = itemView.findViewById(R.id.movie_row_container);
             movieTitleTextView = (TextView) itemView.findViewById(R.id.movie_title_text_view);
             movieOverviewTextView = (TextView) itemView.findViewById(R.id.movie_overview_text_view);
             moviePosterImageView = (ImageView) itemView.findViewById(R.id.movie_image_view);
             movieVotesTextView = (TextView) itemView.findViewById(R.id.movie_votes_text_view);
+
         }
 
         public void bind(Movie movie) {
@@ -86,6 +95,17 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
             // add poster image
             Glide.with(context).load(imageURL).into(moviePosterImageView);
+
+            // add movie on click listener
+            movieContainer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, MovieDetailsActivity.class);
+
+                    intent.putExtra("movie", Parcels.wrap(movie));
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }
