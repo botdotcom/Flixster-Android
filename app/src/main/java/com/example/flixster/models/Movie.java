@@ -12,6 +12,7 @@ import java.util.List;
 public class Movie {
     private String posterPath;
     private String backdropPath;
+    private int id;
     private String title;
     private String overview;
     private double votes;
@@ -22,6 +23,7 @@ public class Movie {
     public Movie(JSONObject jsonObject) throws JSONException {
         posterPath = jsonObject.getString("poster_path");
         backdropPath = jsonObject.getString("backdrop_path");
+        id = jsonObject.getInt("id");
         title = jsonObject.getString("title");
         overview = jsonObject.getString("overview");
         votes = jsonObject.getDouble("vote_average");
@@ -45,6 +47,10 @@ public class Movie {
 
     public double getVotes() {
         return votes;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public static List<Movie> moviesFromJsonArray(JSONArray movieJsonArray) throws JSONException {

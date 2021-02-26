@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.i(ACTIVITY_TAG, "Got results");
                     movieList.addAll(Movie.moviesFromJsonArray(movieResults));
                     movieAdapter.notifyDataSetChanged();
-                    Log.i(ACTIVITY_TAG, "Movies: " + movieList.size());
+                    // Log.i(ACTIVITY_TAG, "Movies: " + movieList.size());
                 }
                 catch (JSONException je) {
                     Log.e(ACTIVITY_TAG, "JSON exception hit", je);
